@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        ul {
+        list-style-type: none;   
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            background-color: #add5e9; 
+        }
+
+        .box {             
+            
+            border-radius: 10px;
+            padding: 3rem;
+            background-color: white;
+            color: blueviolet;
+            font-family: 'Courier New', Courier, monospace;
+}
+
+h1,h2 {
+  text-align: center;
+  z-index: -1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+    </style>  
+    
+</head>
+<body>
+    
+        <div>
+           <h1>  Welcome to the Quiz </h1>
+           
+        
+        <div class="box">
+          <h2 id="showquestion"></h2>
+            <ul>
+            <li>
+                <input type="radio" id="first" name="answer"  value="a" />
+                <label id="firstoption"></label>
+              </li>
+              <li>
+                <input type="radio" id="second" name="answer"  value="b" />
+                <label  id="secondoption"></label>
+              </li>
+              <li>
+                <input type="radio" id="third" name="answer"  value="c" />
+                <label id="thirdoption"></label>
+              </li>
+            </ul>
+        </div>
+        
+           
+            <button class="next" onclick="next()">Next</button>
+        
+        <p id="result"></p>
+ 
+    <script>
+        var questions = [
+	{
+		question: "What is capital of India",
+		
+			a: 'Delhi',
+			b: 'Bangalore',
+			c: 'Hyderabad',
+		
+		correctAnswer: 'a'
+	},
+	{
+		question: "How many colours are there in rainbow",
+		
+			a: '5',
+			b: '6',
+			c: '7',
+		
+		correctAnswer: 'c'
+	},
+    {
+    question: "Largest Planet of Solar System",
+		
+			a: 'Earth',
+			b: 'Mars',
+			c: 'Jupiter',
+	
+		correctAnswer: 'c'
+    }
+];
+
+var index=0;
+var totalQuestions=questions.length;
+var score=0;
+
+function showQuestion() {
+    var quiz = document.getElementById("showquestion");
+    document.getElementById("showquestion").innerHTML = questions[index].question;     
+    var firstoption = document.getElementById('firstoption');
+    firstoption.innerText = questions[index].a;
+    var secondoption = document.getElementById('secondoption');
+    secondoption.innerText = questions[index].b;
+    var thirdoption = document.getElementById('thirdoption');
+    thirdoption.innerText = questions[index].c;    
+}
+
+
+
+function next() {
+var result=undefined;
+
+var choice = document.getElementsByName("answer");
+  for (var i = 0; i < choice.length; i++) {
+            if (choice[i].checked) {
+                result = choice[i].value;
+                break;
+            }
+        }
+   
+      if (result == questions[index].correctAnswer) {
+        score++;
+        alert("Correct Answer");
+      }
+      else{
+        alert("Wrong Answer");
+      }
+    
+    index++;
+    if (index < totalQuestions) {
+        showQuestion();
+    } else {
+      document.getElementById("result").innerHTML="Final Score is "+score+" .";
+    }
+  ;
+}
+
+window.onload = showQuestion();
+    </script>
+</body>
+</html>
